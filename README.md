@@ -17,9 +17,28 @@ This script is meant to make it easy to setup and implement migrations in minute
 
 In a build pipeline (using whatever CICD tools you use) with the postgresql client cli installed, simply run the following command, plugging in the credentials as needed: 
 
-    export MSQL_USER=username
-    export MSQL_PASS=password
-    export MSQL_HOST=hostname
-    export MSQL_PORT=1443
+    export SQLCMDUSER=sa
+    export SQLCMDPASSWORD=yourStrong(\!)Password
+    export SQLCMDSERVER=tcp:127.0.0.1,1433
+    export MSSQL_EXTRA_CLI_PARAMS=
+    export MSSQL_DB=somedb
     ./run-migrations.sh
 
+You can see the full env variable options at https://docs.microsoft.com/en-us/sql/ssms/scripting/sqlcmd-use-with-scripting-variables?view=sql-server-ver15
+
+## Usage with Docker
+
+If you run these commands within the context of the official mssql image, you can then run our script. 
+
+To boot up mysql cli locally with docker: 
+
+    docker run -it -w /data -v /$(PWD):/data mcr.microsoft.com/mssql-tools bash
+
+And then you can run these commands like normal: 
+
+    export SQLCMDUSER=sa
+    export SQLCMDPASSWORD=yourStrong(\!)Password
+    export SQLCMDSERVER=tcp:127.0.0.1,1433
+    export MSSQL_EXTRA_CLI_PARAMS=
+    export MSSQL_DB=somedb
+    ./run-migrations.sh
