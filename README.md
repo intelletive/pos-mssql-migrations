@@ -1,4 +1,4 @@
-# mssql-pos-migrations
+# pos-mssql-migrations
 Code-less Framework for doing POS (Plain-Old-SQL) Microsoft SQL Server database schema deployments. 
 
 ## Purpose
